@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace ZooAzureApp.Controllers
 {
-    public class crearnuevoController : ApiController
+    public class ClasificacionController : ApiController
     {
         // GET: api/crearnuevo
         public IEnumerable<string> Get()
