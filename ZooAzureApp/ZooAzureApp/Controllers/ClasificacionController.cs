@@ -9,29 +9,55 @@ namespace ZooAzureApp.Controllers
 {
     public class ClasificacionController : ApiController
     {
-        // GET: api/crearnuevo
-        public IEnumerable<string> Get()
+        // GET: api/Clasificacion
+        public RespuestaApi Get()
         {
-            return new string[] { "value1", "value2" };
-        }
+            RespuestaApi respuestaApi = new RespuestaApi();
+            List<Clasificacion> dataClasificacion = new List<Clasificacion>();
 
-        // GET: api/crearnuevo/5
-        public string Get(int id)
+            try
+            {
+                Db.Conectar();
+                if (Db.EstaLaConexionAbierta())
+                {
+                    dataClasificacion = Db.GetClasificaciones();
+
+                }
+
+                respuestaApi.error = "";
+                Db.Desconectar();
+                    
+            }
+
+            catch
+            {
+                respuestaApi.totalElementos = 0;
+                respuestaApi.error = "dame error";
+            }
+
+            respuestaApi.totalElementos = dataClasificacion.Count;
+            respuestaApi.dataClasificacion = dataClasificacion;
+            return respuestaApi;
+
+    }
+
+    // GET: api/Clasificacion/5
+    public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/crearnuevo
+        // POST: api/Clasificacion
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/crearnuevo/5
+        // PUT: api/Clasificacion/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/crearnuevo/5
+        // DELETE: api/Clasificacion/5
         public void Delete(int id)
         {
         }
